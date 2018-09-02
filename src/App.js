@@ -43,6 +43,26 @@ class App extends Component {
         title: 'Eighth',
         image_key: Math.random(),
         loaded: false
+      },
+      {
+        title: 'Ninth',
+        image_key: Math.random(),
+        loaded: false
+      },
+      {
+        title: 'Tenth',
+        image_key: Math.random(),
+        loaded: false
+      },
+      {
+        title: 'Eleventh',
+        image_key: Math.random(),
+        loaded: false
+      },
+      {
+        title: 'Twelfth',
+        image_key: Math.random(),
+        loaded: false
       }
     ]
   }
@@ -77,7 +97,21 @@ class App extends Component {
         return image
       })
     })
-    console.log(new_state)
+    this.setState(new_state)
+  }
+
+  LoadNewImage = (i) => {
+    let new_state = Object.assign({}, this.state, {
+      images: this.state.images.map((image, index) => {
+        if (index === i) {
+          return Object.assign({}, image, {
+            image_key: Math.random(),
+            loaded: false
+          })
+        }
+        return image
+      })
+    })
     this.setState(new_state)
   }
 
@@ -96,9 +130,9 @@ class App extends Component {
 
             {this.state.images.map((image, i) => {
               return(
-                <div className="col-lg-3 mt-5" key={i}>
+                <div className="col-lg-3 mt-5" key={i} onClick={() => this.LoadNewImage(i)}>
                   <div className="content-piece text-center container-fluid">
-                    <h2>{image.title}</h2>
+                    <h1>{image.title}</h1>
                     {!image.loaded ?
                       <div className="img-fluid image-loading mx-auto"></div> : ''
                     }
